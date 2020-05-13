@@ -13,7 +13,6 @@ public class MenuPageController {
     @FXML
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
-        System.out.println("chuj");
     }
 
 }
