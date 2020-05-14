@@ -6,7 +6,7 @@ import javax.persistence.*;
 //@Entity
 //@Table(name="pacjenci")
 public class Pacjenci {
-
+/*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -87,6 +87,6 @@ public class Pacjenci {
 
     public void setAdres(Adresy adres) {
         this.adres = adres;
-    }
+    }*/
 }
 

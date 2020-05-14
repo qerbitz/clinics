@@ -6,7 +6,7 @@ import javax.persistence.*;
 //@Entity
 //@Table(name="Lekarze")
 public class Lekarze {
-
+/*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_lekarza")
@@ -84,5 +84,7 @@ public class Lekarze {
                 ", adres=" + adres +
                 ", nr_gabinetu=" + nr_gabinetu +
                 '}';
-    }
+    }*/
 }
+
+
