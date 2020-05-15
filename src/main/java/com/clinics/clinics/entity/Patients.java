@@ -3,14 +3,14 @@ package com.clinics.clinics.entity;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="Lekarze")
-public class Lekarze {
-/*
+@Entity
+@Table(name="Pacjenci")
+public class Patients {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_lekarza")
-    private int id_lekarza;
+    @Column(name="id")
+    private int id_pacjenta;
 
     @Column(name="pesel")
     private String pesel;
@@ -21,18 +21,32 @@ public class Lekarze {
     @Column(name="nazwisko")
     private String nazwisko;
 
+    @Column(name="telefon")
+    private String telefon;
+
     @Column(name="id_adresu")
-    private Adresy adres;
+    private Adress adres;
 
-    @Column(name="nr_gabinetu")
-    private int nr_gabinetu;
-
-    public Lekarze(String pesel, String imie, String nazwisko, Adresy adres, int nr_gabinetu) {
+    public Patients(int id_pacjenta, String pesel, String imie, String nazwisko, String telefon, Adress adres) {
+        this.id_pacjenta = id_pacjenta;
         this.pesel = pesel;
         this.imie = imie;
         this.nazwisko = nazwisko;
+        this.telefon = telefon;
         this.adres = adres;
-        this.nr_gabinetu = nr_gabinetu;
+    }
+
+    public Patients()
+    {
+
+    }
+
+    public int getId_pacjenta() {
+        return id_pacjenta;
+    }
+
+    public void setId_pacjenta(int id_pacjenta) {
+        this.id_pacjenta = id_pacjenta;
     }
 
     public String getPesel() {
@@ -59,32 +73,32 @@ public class Lekarze {
         this.nazwisko = nazwisko;
     }
 
-    public Adresy getAdres() {
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public Adress getAdres() {
         return adres;
     }
 
-    public void setAdres(Adresy adres) {
+    public void setAdres(Adress adres) {
         this.adres = adres;
-    }
-
-    public int getNr_gabinetu() {
-        return nr_gabinetu;
-    }
-
-    public void setNr_gabinetu(int nr_gabinetu) {
-        this.nr_gabinetu = nr_gabinetu;
     }
 
     @Override
     public String toString() {
-        return "Lekarze{" +
-                "pesel='" + pesel + '\'' +
+        return "Patients{" +
+                "id_pacjenta=" + id_pacjenta +
+                ", pesel='" + pesel + '\'' +
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
+                ", telefon='" + telefon + '\'' +
                 ", adres=" + adres +
-                ", nr_gabinetu=" + nr_gabinetu +
                 '}';
-    }*/
+    }
 }
-
 

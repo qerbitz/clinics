@@ -1,24 +1,20 @@
 package com.clinics.clinics.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 //@Entity
 //@Table(name="Specjalizacja_lekarz")
 public class Specjalizacja_lekarz {
 
     //@Column(name="id_adresu")
-    private Adresy adres;
+    private Adress adres;
 
     //@Column(name="id_specjalizacji")
     private Specjalizacje specjalizacje;
 
-    public Adresy getAdres() {
+    public Adress getAdres() {
         return adres;
     }
 
-    public void setAdres(Adresy adres) {
+    public void setAdres(Adress adres) {
         this.adres = adres;
     }
 
@@ -30,7 +26,7 @@ public class Specjalizacja_lekarz {
         this.specjalizacje = specjalizacje;
     }
 
-    public Specjalizacja_lekarz(Adresy adres, Specjalizacje specjalizacje) {
+    public Specjalizacja_lekarz(Adress adres, Specjalizacje specjalizacje) {
         this.adres = adres;
         this.specjalizacje = specjalizacje;
     }

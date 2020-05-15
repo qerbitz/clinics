@@ -43,10 +43,10 @@ public class Visits{
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
         specializationService = (SpecializationService) springContext.getBean("specializationServiceImpl");
 
-        //column1.setCellFactory(new PropertyValueFactory<>("id_specjalizacji"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("id_specjalizacji"));
         column2.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         tbl.setItems(getObservableListAllSpecialization());
         tbl.getColumns().clear();
-        tbl.getColumns().addAll(column2);
+        tbl.getColumns().addAll(column1, column2);
     }
 }
