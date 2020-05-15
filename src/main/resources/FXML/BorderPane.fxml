@@ -3,8 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.MenuPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.Visits">
    <children>
       <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -12,10 +11,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="212.0">
                      <children>
-                        <TableView layoutX="221.0" layoutY="18.0" prefHeight="318.0" prefWidth="557.0">
+                        <TableView fx:id="tbl" layoutX="221.0" layoutY="18.0" prefHeight="318.0" prefWidth="557.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="column1" prefWidth="75.0" text="C1" />
+                            <TableColumn fx:id="column2" prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
                      </children>

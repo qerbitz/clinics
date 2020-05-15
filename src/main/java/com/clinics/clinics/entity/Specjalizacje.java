@@ -3,12 +3,11 @@ package com.clinics.clinics.entity;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name="Specjalizacje")
+@Entity
+@Table(name="specjalizacje")
 public class Specjalizacje {
-/*
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_specjalizacji")
     private int id_specjalizacji;
 
@@ -17,6 +16,11 @@ public class Specjalizacje {
 
     public Specjalizacje(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    public Specjalizacje()
+    {
+
     }
 
     public int getId_specjalizacji() {
@@ -41,5 +45,5 @@ public class Specjalizacje {
                 "id_specjalizacji=" + id_specjalizacji +
                 ", nazwa='" + nazwa + '\'' +
                 '}';
-    }*/
+    }
 }

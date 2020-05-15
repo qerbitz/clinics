@@ -3,10 +3,10 @@ package com.clinics.clinics.entity;
 import javax.persistence.*;
 
 
-//@Entity
-//@Table(name="adresy")
+@Entity
+@Table(name="adresy")
 public class Adresy {
-/*
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_adresu")
@@ -106,5 +106,5 @@ public class Adresy {
                 ", nr_domu='" + nr_domu + '\'' +
                 ", kod_pocztowy='" + kod_pocztowy + '\'' +
                 '}';
-    }*/
+    }
 }
