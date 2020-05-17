@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="specjalizacje")
-public class Specjalizacje {
+public class Specialization {
 
     @Id
     @Column(name="id_specjalizacji")
@@ -14,13 +14,12 @@ public class Specjalizacje {
     @Column(name="nazwa")
     private String nazwa;
 
-    public Specjalizacje(String nazwa) {
+    public Specialization(String nazwa) {
         this.nazwa = nazwa;
     }
 
-    public Specjalizacje()
+    public Specialization()
     {
-
     }
 
     public int getId_specjalizacji() {

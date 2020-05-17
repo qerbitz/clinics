@@ -21,7 +21,8 @@ public class Doctors {
     @Column(name="nazwisko")
     private String surname;
 
-    @Column(name="id_adresu")
+    @OneToOne
+    @JoinColumn(name="id_adresu")
     private Adress adress;
 
     @Column(name="nr_gabinetu")

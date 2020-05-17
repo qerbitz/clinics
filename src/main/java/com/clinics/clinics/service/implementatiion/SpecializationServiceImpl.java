@@ -1,6 +1,6 @@
 package com.clinics.clinics.service.implementatiion;
 
-import com.clinics.clinics.entity.Specjalizacje;
+import com.clinics.clinics.entity.Specialization;
 import com.clinics.clinics.repository.SpecializationRepository;
 import com.clinics.clinics.service.interf.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     @Override
-    public List<Specjalizacje> getAllSpecializations() {
+    public List<Specialization> getAllSpecializations() {
         return specializationRepository.findAll();
     }
 }

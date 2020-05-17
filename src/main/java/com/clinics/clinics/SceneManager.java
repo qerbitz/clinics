@@ -27,7 +27,6 @@ public class SceneManager {
             path = view.get(name);
             Parent root = FXMLLoader.load(SceneManager.class.getClassLoader().getResource(path));
             Scene scene = new Scene(root,800,600);
-            //stage.setTitle("Przychodnia");
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();

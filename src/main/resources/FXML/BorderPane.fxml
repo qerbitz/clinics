@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.Visits">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.Visits">
    <children>
       <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Panel wizualizacji">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="212.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1288000.0">
                      <children>
-                        <TableView fx:id="tbl" layoutX="221.0" layoutY="18.0" prefHeight="318.0" prefWidth="557.0">
+                        <TableView fx:id="tbl" layoutX="184.0" layoutY="51.0" prefHeight="500.0" prefWidth="600.0">
                           <columns>
-                            <TableColumn fx:id="column1" prefWidth="75.0" text="C1" />
-                            <TableColumn fx:id="column2" prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="column1" prefWidth="200.0" text="Imie" />
+                            <TableColumn fx:id="column2" prefWidth="200.0" text="Nazwisko" />
+                              <TableColumn fx:id="column21" prefWidth="200.0" text="Liczba specjalizacji" />
                           </columns>
                         </TableView>
+                        <VBox layoutX="10.0" layoutY="17.0" prefHeight="378.0" prefWidth="165.0">
+                           <children>
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd2" />
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd" />
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd1" />
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd3" />
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
+                           </children>
+                        </VBox>
+                        <TextField layoutX="18.0" layoutY="422.0" />
+                        <Label layoutX="72.0" layoutY="395.0" text="Szukaj:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="409.0" layoutY="17.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
         </tabs>

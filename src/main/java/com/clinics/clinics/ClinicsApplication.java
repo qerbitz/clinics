@@ -2,6 +2,7 @@ package com.clinics.clinics;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,7 +34,8 @@ public class ClinicsApplication extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setStage(primaryStage);
 		SceneManager.addScene("visits", "FXML/BorderPane.fxml");
-		 SceneManager.renderScene("visits");
+		//SceneManager.addScene("visits", "FXML/BorderPane1.fxml");
+		SceneManager.renderScene("visits");
 	}
 
 	@Override

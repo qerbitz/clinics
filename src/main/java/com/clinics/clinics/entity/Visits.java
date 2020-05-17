@@ -11,19 +11,24 @@ public class Visits {
     @Column(name="id_wizyty")
     private int id_visit;
 
-    @Column(name="id_diagnozy")
+    @ManyToOne
+    @JoinColumn(name="id_diagnozy")
     private Diagnosis id_diagnosis;
 
-    @Column(name="id_terminu")
+    @ManyToOne
+    @JoinColumn(name="id_terminu")
     private Deadlines id_deadline;
 
-    @Column(name="id_przychodni")
+    @ManyToOne
+    @JoinColumn(name="id_przychodni")
     private Clinics id_clinics;
 
-    @Column(name="id_lekarza")
+    @ManyToOne
+    @JoinColumn(name="id_lekarza")
     private Doctors id_doctor;
 
-    @Column(name="id_pacjenta")
+    @ManyToOne
+    @JoinColumn(name="id_pacjenta")
     private Patients id_patient;
 
     public Visits(int id_visit, Diagnosis id_diagnosis, Deadlines id_deadline, Clinics id_clinics, Doctors id_doctor, Patients id_patient) {

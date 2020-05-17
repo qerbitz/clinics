@@ -1,9 +1,6 @@
 package com.clinics.clinics.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Przychodnia")
@@ -13,7 +10,8 @@ public class Clinics {
     @Column(name = "id_przychodni")
     private int id_przychodni;
 
-    @Column(name ="id_adresu")
+    @ManyToOne
+    @JoinColumn(name ="id_adresu")
     private Adress id_adresu;
 
     public Clinics(int id_przychodni, Adress id_adresu) {

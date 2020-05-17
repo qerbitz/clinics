@@ -24,7 +24,8 @@ public class Patients {
     @Column(name="telefon")
     private String telefon;
 
-    @Column(name="id_adresu")
+    @OneToOne
+    @JoinColumn(name="id_adresu")
     private Adress adres;
 
     public Patients(int id_pacjenta, String pesel, String imie, String nazwisko, String telefon, Adress adres) {
