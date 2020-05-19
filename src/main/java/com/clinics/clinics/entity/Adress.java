@@ -39,6 +39,10 @@ public class Adress {
         this.zip_code = zip_code;
     }
 
+    public Adress(){
+
+    }
+
     public int getId_adress() {
         return id_adress;
     }

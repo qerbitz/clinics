@@ -3,7 +3,9 @@ package com.clinics.clinics.Controllers;
 
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
+import com.clinics.clinics.entity.Doctors;
 import com.clinics.clinics.entity.Specialization;
+import com.clinics.clinics.service.interf.DoctorsService;
 import com.clinics.clinics.service.interf.SpecializationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +28,6 @@ import java.util.List;
 @Controller
 public class Visits{
 
-    ObservableList<Specialization> observableListSpecialization = FXCollections.observableArrayList();
 
     public ObservableList<Specialization> getObservableListAllSpecialization(){
         List<Specialization> ordersList = specializationService.getAllSpecializations();
@@ -34,7 +35,18 @@ public class Visits{
         return this.observableListSpecialization;
     }
 
+    public ObservableList<Doctors> getObservableListAllDoctors(){
+        List<Doctors> doctorsList = doctorsService.getAllDoctors();
+        this.observableListDoctors.addAll(doctorsList);
+        return this.observableListDoctors;
+    }
+
     private SpecializationService specializationService;
+
+    private DoctorsService doctorsService;
+
+    ObservableList<Specialization> observableListSpecialization = FXCollections.observableArrayList();
+    ObservableList<Doctors> observableListDoctors = FXCollections.observableArrayList();
 
     @FXML
     private ImageView xdd;
@@ -52,13 +64,16 @@ public class Visits{
     private ImageView xdd4;
 
     @FXML
-    private TableColumn<Specialization, String> column1;
+    private TableColumn<Doctors, String> column_name;
 
     @FXML
-    private TableColumn<Specialization, String> column2;
+    private TableColumn<Doctors, String> column_surname;
 
     @FXML
-    private TableView<Specialization> tbl;
+    private TableColumn<Doctors, String> column_count;
+
+    @FXML
+    private TableView<Doctors> tbl;
 
     @FXML
     public void haHA(MouseEvent event) {
@@ -69,12 +84,13 @@ public class Visits{
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
         specializationService = (SpecializationService) springContext.getBean("specializationServiceImpl");
+        doctorsService = (DoctorsService) springContext.getBean("doctorsServiceImpl");
 
-        column1.setCellValueFactory(new PropertyValueFactory<>("id_specjalizacji"));
-        column2.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
-        tbl.setItems(getObservableListAllSpecialization());
+        column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        column_surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         tbl.getColumns().clear();
-        tbl.getColumns().addAll(column1, column2);
+        tbl.setItems(getObservableListAllDoctors());
+        tbl.getColumns().addAll(column_name, column_surname);
 
         File file = new File("D:\\Pobrane - chrome\\unnamed.png");
         Image image = new Image(file.toURI().toString());
@@ -88,9 +104,9 @@ public class Visits{
 
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Tile pressed xddd ");
-                SceneManager.addScene("visits", "FXML/BorderPane1.fxml");
-                SceneManager.renderScene("visits");
+                System.out.println("xdddd");
+                //SceneManager.addScene("visits", "FXML/BorderPane1.fxml");
+               // SceneManager.renderScene("visits");
                 event.consume();
             }
         });

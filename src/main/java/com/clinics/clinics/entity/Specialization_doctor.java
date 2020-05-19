@@ -1,11 +1,14 @@
 package com.clinics.clinics.entity;
 
-
 import javax.persistence.*;
 
-@Embeddable
-@Table(name="Specjalizacja_lekarz")
+@Entity
+@Table(name="specjalizacja_lekarz")
 public class Specialization_doctor {
+
+    @Id
+    @Column(name = "ajdi")
+    private int ajdi;
 
     @ManyToOne
     @JoinColumn(name="id_lekarza")
@@ -18,6 +21,10 @@ public class Specialization_doctor {
     public Specialization_doctor(Doctors id_doctor, Specialization specialization) {
         this.id_doctor = id_doctor;
         this.specialization = specialization;
+    }
+
+    public Specialization_doctor(){
+
     }
 
     public Doctors getId_doctor() {

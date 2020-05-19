@@ -10,7 +10,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 
 @SpringBootApplication
-
 public class ClinicsApplication extends Application {
 	private static ConfigurableApplicationContext springContext;
 	private FXMLLoader fxmlLoader;
