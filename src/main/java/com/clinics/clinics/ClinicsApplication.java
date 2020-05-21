@@ -33,7 +33,6 @@ public class ClinicsApplication extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setStage(primaryStage);
 		SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
-		//SceneManager.addScene("visits", "FXML/BorderPane1.fxml");
 		SceneManager.renderScene("specializationController");
 	}
 

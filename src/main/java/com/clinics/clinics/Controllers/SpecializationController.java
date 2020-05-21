@@ -36,19 +36,9 @@ public class SpecializationController {
         return this.observableListSpecialization;
     }
 
-    public ObservableList<Doctors> getObservableListAllDoctors(){
-        List<Doctors> doctorsList = doctorsService.getAllDoctors();
-        this.observableListDoctors.addAll(doctorsList);
-        return this.observableListDoctors;
-    }
-
-
-    private SpecializationService specializationService;
-
     private DoctorsService doctorsService;
 
     ObservableList<SpecializationCount> observableListSpecialization = FXCollections.observableArrayList();
-    ObservableList<Doctors> observableListDoctors = FXCollections.observableArrayList();
 
     @FXML
     private ImageView xdd;
@@ -85,12 +75,11 @@ public class SpecializationController {
     @FXML
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
-        specializationService = (SpecializationService) springContext.getBean("specializationServiceImpl");
         doctorsService = (DoctorsService) springContext.getBean("doctorsServiceImpl");
 
         column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         column_surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        column_count.setCellValueFactory(new PropertyValueFactory<>("sumka"));
+        column_count.setCellValueFactory(new PropertyValueFactory<>("count"));
         tbl.getColumns().clear();
         tbl.setItems(getObservableListAllSpecialization());
         tbl.getColumns().addAll(column_name, column_surname, column_count);
@@ -115,10 +104,6 @@ public class SpecializationController {
                 event.consume();
             }
         });
-
-
-
-
-
+        
     }
 }

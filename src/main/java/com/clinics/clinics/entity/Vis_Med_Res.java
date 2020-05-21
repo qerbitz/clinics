@@ -1,27 +1,40 @@
-//package com.clinics.clinics.entity;
+package com.clinics.clinics.entity;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "Wizyty_leki_badania")
-/*public class Vis_Med_Res {
+@Entity
+@Table(name = "Wizyty_leki_badania")
+public class Vis_Med_Res {
 
-   // @ManyToOne
-    //@JoinColumn(name ="id_wizyty")
+    @Id
+    @Column(name = "ajdi")
+    private int ajdi;
+
+    @ManyToOne
+    @JoinColumn(name ="id_wizyty")
     private Visits id_visit;
 
-    //@ManyToOne
-    //@JoinColumn(name ="id_badania")
+    @ManyToOne
+    @JoinColumn(name ="id_badania")
     private Research id_research;
 
-    //@ManyToOne
-    //@JoinColumn(name ="id_leku")
+    @ManyToOne
+    @JoinColumn(name ="id_leku")
     private Medicines id_medicine;
 
-    public Vis_Med_Res(Visits id_visit, Research id_research, Medicines id_medicine) {
+    public Vis_Med_Res(int ajdi, Visits id_visit, Research id_research, Medicines id_medicine) {
+        this.ajdi = ajdi;
         this.id_visit = id_visit;
         this.id_research = id_research;
         this.id_medicine = id_medicine;
+    }
+
+    public int getAjdi() {
+        return ajdi;
+    }
+
+    public void setAjdi(int ajdi) {
+        this.ajdi = ajdi;
     }
 
     public Visits getId_visit() {
@@ -51,9 +64,10 @@ import javax.persistence.*;
     @Override
     public String toString() {
         return "Vis_Med_Res{" +
-                "id_visit=" + id_visit +
+                "ajdi=" + ajdi +
+                ", id_visit=" + id_visit +
                 ", id_research=" + id_research +
                 ", id_medicine=" + id_medicine +
                 '}';
     }
-}*/
+}

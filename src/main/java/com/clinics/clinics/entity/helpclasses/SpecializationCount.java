@@ -4,7 +4,7 @@ public class SpecializationCount {
 
     private String name;
     private String surname;
-    private String sumka;
+    private String count;
 
     public SpecializationCount(){
 
@@ -26,11 +26,11 @@ public class SpecializationCount {
         this.surname = surname;
     }
 
-    public String getSumka() {
-        return sumka;
+    public String getCount() {
+        return count;
     }
 
-    public void setSumka(String sumka) {
-        this.sumka = sumka;
+    public void setCount(String count) {
+        this.count = count;
     }
 }
