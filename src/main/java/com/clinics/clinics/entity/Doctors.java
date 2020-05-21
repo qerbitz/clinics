@@ -27,6 +27,7 @@ public class Doctors {
     @Column(name="nr_gabinetu")
     private String nr_office;
 
+
     public Doctors(){
 
     }

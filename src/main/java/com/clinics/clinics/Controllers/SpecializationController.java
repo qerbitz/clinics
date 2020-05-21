@@ -5,6 +5,7 @@ import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
 import com.clinics.clinics.entity.Doctors;
 import com.clinics.clinics.entity.Specialization;
+import com.clinics.clinics.entity.helpclasses.SpecializationCount;
 import com.clinics.clinics.service.interf.DoctorsService;
 import com.clinics.clinics.service.interf.SpecializationService;
 import javafx.collections.FXCollections;
@@ -26,12 +27,12 @@ import java.util.List;
 
 
 @Controller
-public class Visits{
+public class SpecializationController {
 
 
-    public ObservableList<Specialization> getObservableListAllSpecialization(){
-        List<Specialization> ordersList = specializationService.getAllSpecializations();
-        this.observableListSpecialization.addAll(ordersList);
+    public ObservableList<SpecializationCount> getObservableListAllSpecialization(){
+        List<SpecializationCount> specializationList = doctorsService.getSpecializationCount();
+        this.observableListSpecialization.addAll(specializationList);
         return this.observableListSpecialization;
     }
 
@@ -41,11 +42,12 @@ public class Visits{
         return this.observableListDoctors;
     }
 
+
     private SpecializationService specializationService;
 
     private DoctorsService doctorsService;
 
-    ObservableList<Specialization> observableListSpecialization = FXCollections.observableArrayList();
+    ObservableList<SpecializationCount> observableListSpecialization = FXCollections.observableArrayList();
     ObservableList<Doctors> observableListDoctors = FXCollections.observableArrayList();
 
     @FXML
@@ -64,16 +66,16 @@ public class Visits{
     private ImageView xdd4;
 
     @FXML
-    private TableColumn<Doctors, String> column_name;
+    private TableColumn<SpecializationCount, String> column_name;
 
     @FXML
-    private TableColumn<Doctors, String> column_surname;
+    private TableColumn<SpecializationCount, String> column_surname;
 
     @FXML
-    private TableColumn<Doctors, String> column_count;
+    private TableColumn<SpecializationCount, String> column_count;
 
     @FXML
-    private TableView<Doctors> tbl;
+    private TableView<SpecializationCount> tbl;
 
     @FXML
     public void haHA(MouseEvent event) {
@@ -88,9 +90,12 @@ public class Visits{
 
         column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         column_surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        column_count.setCellValueFactory(new PropertyValueFactory<>("sumka"));
         tbl.getColumns().clear();
-        tbl.setItems(getObservableListAllDoctors());
-        tbl.getColumns().addAll(column_name, column_surname);
+        tbl.setItems(getObservableListAllSpecialization());
+        tbl.getColumns().addAll(column_name, column_surname, column_count);
+
+
 
         File file = new File("D:\\Pobrane - chrome\\unnamed.png");
         Image image = new Image(file.toURI().toString());
@@ -110,6 +115,10 @@ public class Visits{
                 event.consume();
             }
         });
+
+
+
+
 
     }
 }
