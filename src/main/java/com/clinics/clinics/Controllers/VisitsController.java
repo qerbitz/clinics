@@ -1,14 +1,16 @@
 package com.clinics.clinics.Controllers;
 
-
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
 import com.clinics.clinics.entity.helpclasses.SpecializationCount;
-import com.clinics.clinics.service.interf.DoctorsService;
+import com.clinics.clinics.entity.helpclasses.VisitsCount;
+import com.clinics.clinics.service.interf.VisitsService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -16,26 +18,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
-import javafx.fxml.FXML;
-
 
 import java.io.File;
 import java.util.List;
 
-
 @Controller
-public class SpecializationController {
+public class VisitsController {
 
+    @FXML
+    private TableView<VisitsCount> tbl;
 
-    public ObservableList<SpecializationCount> getObservableListAllSpecialization(){
-        List<SpecializationCount> specializationList = doctorsService.getSpecializationCount();
-        this.observableListSpecialization.addAll(specializationList);
-        return this.observableListSpecialization;
-    }
+    @FXML
+    private TableColumn<VisitsCount, String> column_place;
 
-    private DoctorsService doctorsService;
+    @FXML
+    private TableColumn<VisitsCount, String> column_street;
 
-    ObservableList<SpecializationCount> observableListSpecialization = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<VisitsCount, String> column_count;
 
     @FXML
     private ImageView image_visits;
@@ -53,20 +53,17 @@ public class SpecializationController {
     private ImageView xdd4;
 
     @FXML
-    private TableColumn<SpecializationCount, String> column_name;
+    private ComboBox<String> choice_region;
 
-    @FXML
-    private TableColumn<SpecializationCount, String> column_surname;
+    private VisitsService visitsService;
 
-    @FXML
-    private TableColumn<SpecializationCount, String> column_count;
+    ObservableList<VisitsCount> observableListVisits = FXCollections.observableArrayList();
+    ObservableList<String> values = FXCollections.observableArrayList("podkarpackie", "dolnoslaskie", "lubuskie", "lubelskie");
 
-    @FXML
-    private TableView<SpecializationCount> tbl;
-
-    @FXML
-    public void haHA(MouseEvent event) {
-        System.out.println("xdddd");
+    public ObservableList<VisitsCount> getObservableListAllVisits(){
+        List<VisitsCount> visitsList = visitsService.getVisitsCountByRegion();
+        this.observableListVisits.addAll(visitsList);
+        return this.observableListVisits;
     }
 
     public void help(){
@@ -116,16 +113,17 @@ public class SpecializationController {
     @FXML
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
-        doctorsService = (DoctorsService) springContext.getBean("doctorsServiceImpl");
+        visitsService = (VisitsService) springContext.getBean("visitsServiceImpl");
+        choice_region.setItems(values);
 
-        column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        column_surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        column_place.setCellValueFactory(new PropertyValueFactory<>("place"));
+        column_street.setCellValueFactory(new PropertyValueFactory<>("street"));
         column_count.setCellValueFactory(new PropertyValueFactory<>("count"));
         tbl.getColumns().clear();
-        tbl.setItems(getObservableListAllSpecialization());
-        tbl.getColumns().addAll(column_name, column_surname, column_count);
-
+        tbl.setItems(getObservableListAllVisits());
+        tbl.getColumns().addAll(column_place, column_street, column_count);
 
         help();
+
     }
 }
