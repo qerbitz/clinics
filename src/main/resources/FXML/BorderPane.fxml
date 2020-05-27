@@ -22,10 +22,10 @@
                         </TableView>
                         <VBox layoutX="10.0" layoutY="17.0" prefHeight="378.0" prefWidth="165.0">
                            <children>
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="image_med" />
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="image_visits" />
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="image_specialization" />
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd3" />
+                              <ImageView fx:id="image_med" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_specialization" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits_all" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
                            </children>
                         </VBox>

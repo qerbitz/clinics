@@ -25,6 +25,10 @@ public class Diagnosis {
         this.description = description;
     }
 
+    public Diagnosis(){
+
+    }
+
     public int getId_diagnosis() {
         return id_diagnosis;
     }

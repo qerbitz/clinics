@@ -40,6 +40,10 @@ public class Visits {
         this.id_patient = id_patient;
     }
 
+    public Visits(){
+
+    }
+
     public int getId_visit() {
         return id_visit;
     }

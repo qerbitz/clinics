@@ -21,6 +21,10 @@ public class Research {
         this.name = name;
     }
 
+    public Research(){
+
+    }
+
     public int getId_research() {
         return id_research;
     }

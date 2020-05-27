@@ -26,7 +26,6 @@ import java.util.List;
 @Controller
 public class SpecializationController {
 
-
     public ObservableList<SpecializationCount> getObservableListAllSpecialization(){
         List<SpecializationCount> specializationList = doctorsService.getSpecializationCount();
         this.observableListSpecialization.addAll(specializationList);
@@ -47,7 +46,7 @@ public class SpecializationController {
     private ImageView image_med;
 
     @FXML
-    private ImageView xdd3;
+    private ImageView image_visits_all;
 
     @FXML
     private ImageView xdd4;
@@ -79,7 +78,7 @@ public class SpecializationController {
         image_visits.setImage(new Image(file1.toURI().toString()));
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
-        xdd3.setImage(new Image(file2.toURI().toString()));
+        image_visits_all.setImage(new Image(file2.toURI().toString()));
         xdd4.setImage(new Image(file2.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -111,6 +110,16 @@ public class SpecializationController {
                 event.consume();
             }
         });
+
+        image_visits_all.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
+                SceneManager.renderScene("allVisitsController");
+                event.consume();
+            }
+        });
     }
 
     @FXML
@@ -124,7 +133,6 @@ public class SpecializationController {
         tbl.getColumns().clear();
         tbl.setItems(getObservableListAllSpecialization());
         tbl.getColumns().addAll(column_name, column_surname, column_count);
-
 
         help();
     }

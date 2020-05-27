@@ -9,45 +9,43 @@ public class Patients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id_pacjenta;
+    @Column(name="id_pacjenta")
+    private int id_patient;
 
     @Column(name="pesel")
     private String pesel;
 
     @Column(name="imie")
-    private String imie;
+    private String name;
 
     @Column(name="nazwisko")
-    private String nazwisko;
+    private String surname;
 
     @Column(name="telefon")
-    private String telefon;
+    private String phone;
 
     @OneToOne
     @JoinColumn(name="id_adresu")
     private Adress adres;
 
-    public Patients(int id_pacjenta, String pesel, String imie, String nazwisko, String telefon, Adress adres) {
-        this.id_pacjenta = id_pacjenta;
+    public Patients() {
+    }
+
+    public Patients(int id_pacjenta, String pesel, String name, String surname, String phone, Adress adres) {
+        this.id_patient = id_pacjenta;
         this.pesel = pesel;
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.telefon = telefon;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
         this.adres = adres;
     }
 
-    public Patients()
-    {
-
+    public int getId_patient() {
+        return id_patient;
     }
 
-    public int getId_pacjenta() {
-        return id_pacjenta;
-    }
-
-    public void setId_pacjenta(int id_pacjenta) {
-        this.id_pacjenta = id_pacjenta;
+    public void setId_patient(int id_patient) {
+        this.id_patient = id_patient;
     }
 
     public String getPesel() {
@@ -58,28 +56,28 @@ public class Patients {
         this.pesel = pesel;
     }
 
-    public String getImie() {
-        return imie;
+    public String getName() {
+        return name;
     }
 
-    public void setImie(String imie) {
-        this.imie = imie;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNazwisko() {
-        return nazwisko;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getTelefon() {
-        return telefon;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Adress getAdres() {
@@ -93,11 +91,11 @@ public class Patients {
     @Override
     public String toString() {
         return "Patients{" +
-                "id_pacjenta=" + id_pacjenta +
+                "id_pacjenta=" + id_patient +
                 ", pesel='" + pesel + '\'' +
-                ", imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", telefon='" + telefon + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
                 ", adres=" + adres +
                 '}';
     }

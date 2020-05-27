@@ -1,5 +1,6 @@
 package com.clinics.clinics.service.interf;
 
+import com.clinics.clinics.entity.Visits;
 import com.clinics.clinics.entity.helpclasses.Med_Res_Count;
 import com.clinics.clinics.entity.helpclasses.VisitsCount;
 
@@ -10,4 +11,6 @@ public interface VisitsService {
     List<VisitsCount> getVisitsCountByRegion();
 
     List<Med_Res_Count> getMed_Res_Count();
+
+    List<Visits> getVisitsByTime();
 }

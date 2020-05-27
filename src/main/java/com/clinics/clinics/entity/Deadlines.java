@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
 
 @Entity
 @Table(name = "Terminy")
@@ -15,7 +15,7 @@ public class Deadlines {
     @Column(name = "id_terminu")
     private int id_deadline;
 
-    @Column(name = "data")
+    @Column(name = "data_")
     private Date date;
 
     @Column(name = "czas_od")
@@ -29,6 +29,10 @@ public class Deadlines {
         this.date = date;
         this.time_from = time_from;
         this.time_to = time_to;
+    }
+
+    public Deadlines(){
+
     }
 
     public int getId_deadline() {

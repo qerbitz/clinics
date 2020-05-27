@@ -14,11 +14,11 @@ public class Medicines {
     private int id_medicine;
 
     @Column (name = "nazwa_leku")
-    private String name_medicine;
+    private String name;
 
     public Medicines(int id_medicine, String name_medicine) {
         this.id_medicine = id_medicine;
-        this.name_medicine = name_medicine;
+        this.name = name_medicine;
     }
 
     public int getId_medicine() {
@@ -29,19 +29,19 @@ public class Medicines {
         this.id_medicine = id_medicine;
     }
 
-    public String getName_medicine() {
-        return name_medicine;
+    public String getName() {
+        return name;
     }
 
-    public void setName_medicine(String name_medicine) {
-        this.name_medicine = name_medicine;
+    public void setName(String name_medicine) {
+        this.name = name_medicine;
     }
 
     @Override
     public String toString() {
         return "Medicines{" +
                 "id_medicine=" + id_medicine +
-                ", name_medicine='" + name_medicine + '\'' +
+                ", name_medicine='" + name + '\'' +
                 '}';
     }
 }

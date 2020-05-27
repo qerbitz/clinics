@@ -3,9 +3,6 @@ package com.clinics.clinics.Controllers;
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
 import com.clinics.clinics.entity.helpclasses.Med_Res_Count;
-import com.clinics.clinics.entity.helpclasses.SpecializationCount;
-import com.clinics.clinics.entity.helpclasses.VisitsCount;
-import com.clinics.clinics.service.interf.DoctorsService;
 import com.clinics.clinics.service.interf.VisitsService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +33,7 @@ public class Med_ResController {
     private ImageView image_med;
 
     @FXML
-    private ImageView xdd3;
+    private ImageView image_visits_all;
 
     @FXML
     private ImageView xdd4;
@@ -77,7 +74,7 @@ public class Med_ResController {
         image_visits.setImage(new Image(file1.toURI().toString()));
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
-        xdd3.setImage(new Image(file2.toURI().toString()));
+        image_visits_all.setImage(new Image(file2.toURI().toString()));
         xdd4.setImage(new Image(file2.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -106,6 +103,16 @@ public class Med_ResController {
             public void handle(MouseEvent event) {
                 SceneManager.addScene("visitsController", "FXML/BorderPane2.fxml");
                 SceneManager.renderScene("visitsController");
+                event.consume();
+            }
+        });
+
+        image_visits_all.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
+                SceneManager.renderScene("allVisitsController");
                 event.consume();
             }
         });
