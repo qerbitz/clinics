@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.AllVisitsController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Panel wizualizacji">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1288000.0">
+                     <children>
+                        <TableView fx:id="tbl" layoutX="184.0" layoutY="51.0" prefHeight="500.0" prefWidth="600.0">
+                          <columns>
+                            <TableColumn fx:id="column_patient" prefWidth="150.0" text="Pacjent" />
+                            <TableColumn fx:id="column_doctor" prefWidth="150.0" text="Lekarz" />
+                              <TableColumn fx:id="column_diagnose" prefWidth="150.0" text="Diagnoza" />
+                              <TableColumn fx:id="column_date" prefWidth="150.0" text="Data" />
+                          </columns>
+                        </TableView>
+                        <VBox layoutX="10.0" layoutY="17.0" prefHeight="378.0" prefWidth="165.0">
+                           <children>
+                              <ImageView fx:id="image_med" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_specialization" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits_all" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
+                           </children>
+                        </VBox>
+                        <ComboBox fx:id="choice_voivodeship" layoutX="312.0" layoutY="17.0" prefWidth="150.0" />
+                        <ComboBox fx:id="choice_place" layoutX="499.0" layoutY="17.0" prefWidth="150.0" />
+                        <DatePicker fx:id="date_to" layoutX="6.0" layoutY="502.0" />
+                        <DatePicker fx:id="date_from" layoutX="6.0" layoutY="453.0" />
+                        <Label layoutX="71.0" layoutY="421.0" text="Okres od" />
+                        <Button layoutX="67.0" layoutY="539.0" mnemonicParsing="false" onAction="#show_filtered" text="Wyswietl" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Accordion />
+   </children>
+</AnchorPane>

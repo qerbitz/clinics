@@ -3,7 +3,9 @@ package com.clinics.clinics.Controllers;
 
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
+import com.clinics.clinics.entity.Adress;
 import com.clinics.clinics.entity.Visits;
+import com.clinics.clinics.service.interf.AdressService;
 import com.clinics.clinics.service.interf.VisitsService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -22,7 +24,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -65,14 +68,17 @@ public class AllVisitsController {
     @FXML
     private DatePicker date_from;
 
+    @FXML
+    private ComboBox<String> choice_voivodeship;
 
     @FXML
-    private ComboBox<String> choice_region;
+    private ComboBox<String> choice_place;
 
     private VisitsService visitsService;
+    private AdressService adressService;
 
     ObservableList<Visits> observableListVisits = FXCollections.observableArrayList();
-    ObservableList<String> values = FXCollections.observableArrayList("podkarpackie", "dolnoslaskie", "lubuskie", "lubelskie");
+    ObservableList<String> voievodships = FXCollections.observableArrayList();
 
     public ObservableList<Visits> getObservableListAllVisits(){
         List<Visits> visitsList = visitsService.getVisitsByTime();
@@ -80,9 +86,22 @@ public class AllVisitsController {
         return this.observableListVisits;
     }
 
+    public Date convertDate(LocalDate dateToConvert) {
+        return java.sql.Date.valueOf(dateToConvert);
+    }
+
     @FXML
-    void show_filtered(ActionEvent event) {
-        System.out.println(date_from.getValue());
+    void show_filtered(ActionEvent event) throws ParseException {
+
+        List<Visits> allVisitsList = visitsService.getVisitsByDate(convertDate(date_from.getValue()), convertDate(date_to.getValue()));
+
+        observableListVisits.clear();
+        observableListVisits.addAll(allVisitsList);
+
+
+        show_table();
+        tbl.setItems(observableListVisits);
+        tbl.getColumns().addAll(column_patient, column_doctor, column_diagnose, column_date);
     }
 
     public void help(){
@@ -139,22 +158,30 @@ public class AllVisitsController {
         });
     }
 
+    public void show_table(){
+        column_patient.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_patient().getName()+" "+help.getValue().getId_patient().getSurname()));
+        column_doctor.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_doctor().getName()+" "+help.getValue().getId_doctor().getSurname()));
+        column_diagnose.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_diagnosis().getName()));
+        column_date.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_deadline().getDate().toString()));
+
+        tbl.getColumns().clear();
+    }
+
     @FXML
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
 
         visitsService = (VisitsService) springContext.getBean("visitsServiceImpl");
-       // choice_region.setItems(values);
-        column_patient.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_patient().getName()+" "+help.getValue().getId_patient().getSurname()));
-        column_doctor.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_doctor().getName()+" "+help.getValue().getId_doctor().getSurname()));
-        column_diagnose.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_diagnosis().getName()));
-        column_date.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_deadline().getDate().toString()));
-        tbl.getColumns().clear();
+        adressService = (AdressService) springContext.getBean("adressServiceImpl");
+
+        show_table();
         tbl.setItems(getObservableListAllVisits());
         tbl.getColumns().addAll(column_patient, column_doctor, column_diagnose, column_date);
-
-
         help();
+
+        List<String> taka = adressService.getAllVoievodship();
+        voievodships.addAll(taka);
+        choice_voivodeship.setItems(voievodships);
     }
 
 }

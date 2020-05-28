@@ -8,7 +8,10 @@ import com.clinics.clinics.service.interf.VisitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,5 +97,38 @@ public class VisitsServiceImpl implements VisitsService {
 
         return list;
 
+    }
+
+    @Override
+    public List<Visits> getVisitsByDate(java.util.Date date_from, java.util.Date date_to) throws ParseException {
+        List<Visits> list = new ArrayList<>();
+
+        for (Object[] obj : visitsRepository.getVisitsByDate(date_from, date_to)){
+
+            Patients p = new Patients();
+            p.setName(String.valueOf(obj[0]));
+            p.setSurname(String.valueOf(obj[1]));
+
+            Doctors doctor = new Doctors();
+            doctor.setName(String.valueOf(obj[2]));
+            doctor.setSurname(String.valueOf(obj[3]));
+
+            Diagnosis diagnose = new Diagnosis();
+            diagnose.setName(String.valueOf(obj[5]));
+
+            Deadlines deadline = new Deadlines();
+            String date = String.valueOf(obj[4]);
+            deadline.setDate(Date.valueOf(date));
+
+
+            Visits v = new Visits();
+            v.setId_patient(p);
+            v.setId_doctor(doctor);
+            v.setId_diagnosis(diagnose);
+            v.setId_deadline(deadline);
+            list.add(v);
+        }
+
+        return list;
     }
 }
