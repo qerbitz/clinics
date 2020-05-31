@@ -29,12 +29,13 @@
                               <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
                            </children>
                         </VBox>
-                        <ComboBox fx:id="choice_voivodeship" layoutX="312.0" layoutY="17.0" prefWidth="150.0" />
-                        <ComboBox fx:id="choice_place" layoutX="499.0" layoutY="17.0" prefWidth="150.0" />
+                        <ComboBox fx:id="choice_voivodeship" layoutX="312.0" layoutY="17.0" onAction="#choice_voievodship_action" prefWidth="150.0" />
+                        <ComboBox fx:id="choice_place" layoutX="499.0" layoutY="17.0" onAction="#choice_place_action" prefWidth="150.0" />
                         <DatePicker fx:id="date_to" layoutX="6.0" layoutY="502.0" />
                         <DatePicker fx:id="date_from" layoutX="6.0" layoutY="453.0" />
                         <Label layoutX="71.0" layoutY="421.0" text="Okres od" />
                         <Button layoutX="67.0" layoutY="539.0" mnemonicParsing="false" onAction="#show_filtered" text="Wyswietl" />
+                        <Button layoutX="702.0" layoutY="17.0" mnemonicParsing="false" onAction="#pressButton" text="Button" />
                      </children>
                   </AnchorPane>
             </content>

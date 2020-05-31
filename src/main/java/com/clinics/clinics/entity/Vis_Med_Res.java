@@ -29,6 +29,10 @@ public class Vis_Med_Res {
         this.id_medicine = id_medicine;
     }
 
+    public Vis_Med_Res(){
+
+    }
+
     public int getAjdi() {
         return ajdi;
     }
@@ -66,8 +70,10 @@ public class Vis_Med_Res {
         return "Vis_Med_Res{" +
                 "ajdi=" + ajdi +
                 ", id_visit=" + id_visit +
-                ", id_research=" + id_research +
+                ", id_research=" + id_research.getName() +
                 ", id_medicine=" + id_medicine +
                 '}';
     }
+
+
 }

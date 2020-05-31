@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +26,35 @@ public class VisitsServiceImpl implements VisitsService {
 
 
     @Override
+    public List<VisitsCount> getVisitsCountByRegion(java.util.Date date_from, java.util.Date date_to, String place, String street) {
+        List<VisitsCount> visitsCount = new ArrayList<>();
+
+        for (Object[] obj : visitsRepository.getVisitsCountAllClinics(date_from, date_to, place, street)){
+            String place1 = String.valueOf(obj[0]);
+            String street1 = String.valueOf(obj[1]);
+            String count1 = String.valueOf(obj[2]);
+            VisitsCount object = new VisitsCount();
+            object.setPlace(place1);
+            object.setStreet(street1);
+            object.setCount(count1);
+            visitsCount.add(object);
+        }
+
+        return visitsCount;
+    }
+
+    @Override
     public List<VisitsCount> getVisitsCountByRegion() {
         List<VisitsCount> visitsCount = new ArrayList<>();
 
         for (Object[] obj : visitsRepository.getVisitsCountAllClinics()){
-            String place = String.valueOf(obj[0]);
-            String street = String.valueOf(obj[1]);
-            String count = String.valueOf(obj[2]);
+            String place1 = String.valueOf(obj[0]);
+            String street1 = String.valueOf(obj[1]);
+            String count1 = String.valueOf(obj[2]);
             VisitsCount object = new VisitsCount();
-            object.setPlace(place);
-            object.setStreet(street);
-            object.setCount(count);
+            object.setPlace(place1);
+            object.setStreet(street1);
+            object.setCount(count1);
             visitsCount.add(object);
         }
 
@@ -100,10 +117,10 @@ public class VisitsServiceImpl implements VisitsService {
     }
 
     @Override
-    public List<Visits> getVisitsByDate(java.util.Date date_from, java.util.Date date_to) throws ParseException {
+    public List<Visits> getVisitsByDate(java.util.Date date_from, java.util.Date date_to, String place, String street) throws ParseException {
         List<Visits> list = new ArrayList<>();
 
-        for (Object[] obj : visitsRepository.getVisitsByDate(date_from, date_to)){
+        for (Object[] obj : visitsRepository.getVisitsByDate(date_from, date_to, place, street)){
 
             Patients p = new Patients();
             p.setName(String.valueOf(obj[0]));
@@ -127,6 +144,31 @@ public class VisitsServiceImpl implements VisitsService {
             v.setId_diagnosis(diagnose);
             v.setId_deadline(deadline);
             list.add(v);
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Vis_Med_Res> getDetailsInfo(int ajdi) {
+        List<Vis_Med_Res> list = new ArrayList<>();
+
+        for (Object[] obj : visitsRepository.getDetailsInfo(ajdi)){
+
+            Diagnosis diagnose = new Diagnosis();
+            diagnose.setName(String.valueOf(obj[0]));
+
+            Medicines medicines = new Medicines();
+            medicines.setName(String.valueOf(1));
+
+            Research research = new Research();
+            research.setName(String.valueOf(2));
+
+            Vis_Med_Res vmr = new Vis_Med_Res();
+            vmr.setId_research(research);
+            vmr.setId_medicine(medicines);
+
+            list.add(vmr);
         }
 
         return list;

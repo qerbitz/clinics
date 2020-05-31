@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.VisitsController">
    <children>
@@ -29,18 +28,28 @@
                               <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
                            </children>
                         </VBox>
-                        <TextField layoutX="18.0" layoutY="422.0" />
-                        <Label layoutX="72.0" layoutY="395.0" text="Szukaj:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="choice_region" layoutX="409.0" layoutY="17.0" prefWidth="150.0" />
+                        <ComboBox fx:id="choice_voivodeship" layoutX="325.0" layoutY="15.0" onAction="#choice_voievodship_action" prefWidth="150.0" />
+                        <ComboBox fx:id="choice_place" layoutX="499.0" layoutY="15.0" onAction="#choice_place_action" prefWidth="150.0" />
+                        <DatePicker fx:id="date_to" layoutX="6.0" layoutY="511.0" />
+                        <DatePicker fx:id="date_from" layoutX="6.0" layoutY="463.0" />
+                        <Label layoutX="70.0" layoutY="432.0" text="Okres od" />
+                        <Button layoutX="62.0" layoutY="545.0" mnemonicParsing="false" onAction="#show_filtered" text="Wyswietl" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

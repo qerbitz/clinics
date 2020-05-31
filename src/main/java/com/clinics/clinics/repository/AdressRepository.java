@@ -15,7 +15,9 @@ public interface AdressRepository extends JpaRepository<Adress, Integer> {
             " where voivodeship is not null")
     List<String> getAllVoievodship();
 
-    @Query("select distinct place from Adress" +
-            " where place is not null")
-    List<String> getAllPlaces();
+    @Query("select a.place, a.street, a.nr_house from Adress a, Clinics c" +
+            " where a.place is not null" +
+            " and c.id_adresu.id_adress = a.id_adress" +
+            " and a.voivodeship like :voievodship")
+    List<Object[]> getAllPlaces(String voievodship);
 }

@@ -21,6 +21,10 @@ public class Medicines {
         this.name = name_medicine;
     }
 
+    public Medicines(){
+
+    }
+
     public int getId_medicine() {
         return id_medicine;
     }

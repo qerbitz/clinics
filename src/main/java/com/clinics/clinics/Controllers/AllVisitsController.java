@@ -4,6 +4,8 @@ package com.clinics.clinics.Controllers;
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
 import com.clinics.clinics.entity.Adress;
+import com.clinics.clinics.entity.Research;
+import com.clinics.clinics.entity.Vis_Med_Res;
 import com.clinics.clinics.entity.Visits;
 import com.clinics.clinics.service.interf.AdressService;
 import com.clinics.clinics.service.interf.VisitsService;
@@ -13,19 +15,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ import java.util.List;
 public class AllVisitsController {
 
     @FXML
-    private TableView tbl;
+    private TableView<Visits> tbl;
 
     @FXML
     private TableColumn<Visits, String> column_patient;
@@ -72,13 +73,14 @@ public class AllVisitsController {
     private ComboBox<String> choice_voivodeship;
 
     @FXML
-    private ComboBox<String> choice_place;
+    private ComboBox<Adress> choice_place;
 
     private VisitsService visitsService;
     private AdressService adressService;
 
     ObservableList<Visits> observableListVisits = FXCollections.observableArrayList();
     ObservableList<String> voievodships = FXCollections.observableArrayList();
+    ObservableList<Adress> places = FXCollections.observableArrayList();
 
     public ObservableList<Visits> getObservableListAllVisits(){
         List<Visits> visitsList = visitsService.getVisitsByTime();
@@ -93,22 +95,76 @@ public class AllVisitsController {
     @FXML
     void show_filtered(ActionEvent event) throws ParseException {
 
-        List<Visits> allVisitsList = visitsService.getVisitsByDate(convertDate(date_from.getValue()), convertDate(date_to.getValue()));
+        List<Visits> allVisitsList;
+
+        if(choice_place.getValue() == null){
+            allVisitsList = visitsService.getVisitsByDate(convertDate(date_from.getValue()), convertDate(date_to.getValue()), "","");
+        }
+        else{
+            allVisitsList = visitsService.getVisitsByDate(convertDate(date_from.getValue()), convertDate(date_to.getValue()),
+                    choice_place.getSelectionModel().getSelectedItem().getPlace(), choice_place.getSelectionModel().getSelectedItem().getStreet());
+        }
 
         observableListVisits.clear();
         observableListVisits.addAll(allVisitsList);
 
-
-        show_table();
+        show_table_and_choicebox();
         tbl.setItems(observableListVisits);
         tbl.getColumns().addAll(column_patient, column_doctor, column_diagnose, column_date);
+    }
+
+    @FXML
+    void choice_place_action(ActionEvent event) throws ParseException {
+
+        List<Visits> filtered_list;
+
+        if(date_from.getValue() == null || date_to.getValue() == null){
+            LocalDate date1 = LocalDate.of(2010, 1, 1);
+            LocalDate date2 = LocalDate.of(2030, 1, 1);
+            filtered_list = visitsService.getVisitsByDate(convertDate(date1), convertDate(date2),
+                    choice_place.getSelectionModel().getSelectedItem().getPlace(), choice_place.getSelectionModel().getSelectedItem().getStreet());
+        }
+        else{
+            filtered_list = visitsService.getVisitsByDate(convertDate(date_from.getValue()), convertDate(date_to.getValue()),
+                    choice_place.getSelectionModel().getSelectedItem().getPlace(), choice_place.getSelectionModel().getSelectedItem().getStreet());
+        }
+
+        observableListVisits.clear();
+        observableListVisits.addAll(filtered_list);
+        show_table_and_choicebox();
+        tbl.setItems(observableListVisits);
+        tbl.getColumns().addAll(column_patient, column_doctor, column_diagnose, column_date);
+    }
+
+    @FXML
+    void choice_voievodship_action(ActionEvent event){
+
+        places.clear();
+        choice_place.getItems().clear();
+
+        List<Adress> places_list = adressService.getAllPlaces(choice_voivodeship.getSelectionModel().getSelectedItem());
+        places.addAll(places_list);
+        choice_place.setItems(places);
+
+        choice_place.setConverter(new StringConverter<Adress>() {
+            @Override
+            public String toString(Adress object) {
+                return object.getPlace() + " " + object.getStreet() + " " + object.getNr_house();
+            }
+
+            @Override
+            public Adress fromString(String string) {
+                return null;
+            }
+
+        });
     }
 
     public void help(){
         File file1 = new File("D:\\Pobrane - chrome\\unnamed.png");
         File file2 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
         File file3 = new File("D:\\Pobrane - chrome\\Badania_leki.png");
-        File file4 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
+        File file4 = new File("D:\\Pobrane - chrome\\unnamed.png");
         File file5 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
 
         image_visits.setImage(new Image(file1.toURI().toString()));
@@ -158,7 +214,7 @@ public class AllVisitsController {
         });
     }
 
-    public void show_table(){
+    public void show_table_and_choicebox(){
         column_patient.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_patient().getName()+" "+help.getValue().getId_patient().getSurname()));
         column_doctor.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_doctor().getName()+" "+help.getValue().getId_doctor().getSurname()));
         column_diagnose.setCellValueFactory(help -> new SimpleStringProperty(help.getValue().getId_diagnosis().getName()));
@@ -168,20 +224,47 @@ public class AllVisitsController {
     }
 
     @FXML
+    void pressButton(ActionEvent event){
+
+        int id_visit = tbl.getSelectionModel().getSelectedItem().getId_visit();
+
+        List<Vis_Med_Res> listka = visitsService.getDetailsInfo(id_visit);
+
+        for(Vis_Med_Res obj: listka
+             ) {
+            String imie = obj.getId_medicine().getName();
+            System.out.println(imie);
+        }
+
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setContentText("xd");
+        alert.setTitle("Szczegoly wizyty");
+        alert.setHeaderText(null);
+        ButtonType cancelButtonType = new ButtonType("Wyjdz", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButtonType);
+        alert.showAndWait();
+    }
+
+
+    @FXML
     void initialize() {
         ConfigurableApplicationContext springContext = ClinicsApplication.getSpringContext();
 
         visitsService = (VisitsService) springContext.getBean("visitsServiceImpl");
         adressService = (AdressService) springContext.getBean("adressServiceImpl");
 
-        show_table();
+        show_table_and_choicebox();
         tbl.setItems(getObservableListAllVisits());
         tbl.getColumns().addAll(column_patient, column_doctor, column_diagnose, column_date);
+
+
+        List<String> voievodship_list = adressService.getAllVoievodship();      //////////choicebox voievodship
+        voievodships.addAll(voievodship_list);
+        choice_voivodeship.setItems(voievodships);
+
+
         help();
 
-        List<String> taka = adressService.getAllVoievodship();
-        voievodships.addAll(taka);
-        choice_voivodeship.setItems(voievodships);
     }
 
 }
