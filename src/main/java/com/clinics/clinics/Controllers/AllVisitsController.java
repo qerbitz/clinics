@@ -61,7 +61,7 @@ public class AllVisitsController {
     private ImageView image_visits_all;
 
     @FXML
-    private ImageView xdd4;
+    private ImageView image_apriori;
 
     @FXML
     private DatePicker date_to;
@@ -171,7 +171,7 @@ public class AllVisitsController {
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
         image_visits_all.setImage(new Image(file2.toURI().toString()));
-        xdd4.setImage(new Image(file2.toURI().toString()));
+        image_apriori.setImage(new Image(file2.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
@@ -209,6 +209,16 @@ public class AllVisitsController {
             public void handle(MouseEvent event) {
                 SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
                 SceneManager.renderScene("allVisitsController");
+                event.consume();
+            }
+        });
+
+        image_apriori.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                SceneManager.addScene("aprioriController", "FXML/Weka.fxml");
+                SceneManager.renderScene("aprioriController");
                 event.consume();
             }
         });

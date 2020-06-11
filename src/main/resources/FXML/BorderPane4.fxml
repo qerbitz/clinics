@@ -26,7 +26,7 @@
                               <ImageView fx:id="image_visits" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="image_specialization" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="image_visits_all" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
+                              <ImageView fx:id="image_apriori" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
                         <ComboBox fx:id="choice_voivodeship" layoutX="312.0" layoutY="17.0" onAction="#choice_voievodship_action" prefWidth="150.0" />
