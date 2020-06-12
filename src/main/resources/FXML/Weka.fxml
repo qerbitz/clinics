@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.clinics.clinics.Controllers.AprioriController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Panel wizualizacji">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1288000.0">
+                     <children>
+                        <VBox layoutX="10.0" layoutY="17.0" prefHeight="378.0" prefWidth="165.0">
+                           <children>
+                              <ImageView fx:id="image_med" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_specialization" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_visits_all" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image_apriori" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </VBox>
+                        <TextArea layoutX="184.0" layoutY="57.0" prefHeight="500.0" prefWidth="600.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

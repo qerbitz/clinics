@@ -1,0 +1,12 @@
+@relation Nazwa_leku
+
+@attribute 'Teflexo' {t}
+@attribute 'Prevenar' {t}
+@attribute 'Qlaira' {t}
+@attribute 'Apap' {t}
+
+@data
+t,?,?,?
+?,t,?,?
+?,?,t,?
+?,?,?,t,
