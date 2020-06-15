@@ -30,6 +30,15 @@ public interface VisitsRepository extends JpaRepository<Visits, Integer> {
             " from Adress a, Visits v, Clinics c" +
             " where v.id_clinics.id_clinic = c.id_clinic" +
             " and c.id_adresu.id_adress = a.id_adress" +
+            " and a.voivodeship like :voievodship" +
+            " group by a.place, a.street" +
+            " order by sumka desc")
+    List<Object[]> getVisitsCountAllClinic(@Param("voievodship") String voievodship);
+
+    @Query("select a.place, a.street, count(v.id_visit) as sumka" +
+            " from Adress a, Visits v, Clinics c" +
+            " where v.id_clinics.id_clinic = c.id_clinic" +
+            " and c.id_adresu.id_adress = a.id_adress" +
             " and a.county like '%'" +
             " group by a.place, a.street" +
             " order by sumka desc")
@@ -49,7 +58,7 @@ public interface VisitsRepository extends JpaRepository<Visits, Integer> {
     List<Object[]> getMed_Res_Count();
 
 
-    @Query("select p.name, p.surname, d.name, d.surname, dl.date, dia.name" +
+    @Query("select p.name, p.surname, d.name, d.surname, dl.date, dia.name, v.id_visit" +
             " from Patients p, Visits v, Doctors d, Deadlines dl, Diagnosis dia, Clinics c, Adress a" +
             " where v.id_patient.id_patient = p.id_patient" +
             " and v.id_doctor.id_doctor = d.id_doctor" +
@@ -79,13 +88,12 @@ public interface VisitsRepository extends JpaRepository<Visits, Integer> {
 
 
 
-    @Query("select d.name, m.name, r.name" +
-            " from Diagnosis d, Medicines m, Research r, Visits v, Vis_Med_Res vmr" +
-            " where v.id_diagnosis = d.id_diagnosis" +
-            " and v.id_visit = vmr.id_visit.id_visit" +
+    @Query("select m.name, r.name" +
+            " from Medicines m, Research r, Visits v, Vis_Med_Res vmr" +
+            " where v.id_visit = vmr.id_visit.id_visit" +
             " and m.id_medicine = vmr.id_medicine.id_medicine" +
             " and r.id_research = vmr.id_research.id_research" +
-            " and vmr.id_visit = 1")
-    List<Object[]> getDetailsInfo(@Param("id_visit") int ajdi);
+            " and vmr.id_visit.id_visit = :ajdi")
+    List<Object[]> getDetailsInfo(@Param("ajdi") int ajdi);
 
 }

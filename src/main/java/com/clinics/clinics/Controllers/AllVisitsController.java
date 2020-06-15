@@ -3,10 +3,8 @@ package com.clinics.clinics.Controllers;
 
 import com.clinics.clinics.ClinicsApplication;
 import com.clinics.clinics.SceneManager;
-import com.clinics.clinics.entity.Adress;
-import com.clinics.clinics.entity.Research;
-import com.clinics.clinics.entity.Vis_Med_Res;
-import com.clinics.clinics.entity.Visits;
+import com.clinics.clinics.entity.*;
+import com.clinics.clinics.entity.helpclasses.Details;
 import com.clinics.clinics.service.interf.AdressService;
 import com.clinics.clinics.service.interf.VisitsService;
 import javafx.beans.property.SimpleStringProperty;
@@ -164,20 +162,19 @@ public class AllVisitsController {
         File file1 = new File("D:\\Pobrane - chrome\\unnamed.png");
         File file2 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
         File file3 = new File("D:\\Pobrane - chrome\\Badania_leki.png");
-        File file4 = new File("D:\\Pobrane - chrome\\unnamed.png");
-        File file5 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
+        File file4 = new File("D:\\Pobrane - chrome\\liczba.png");
+        File file5 = new File("D:\\Pobrane - chrome\\apriori.png");
 
-        image_visits.setImage(new Image(file1.toURI().toString()));
+        image_visits.setImage(new Image(file4.toURI().toString()));
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
-        image_visits_all.setImage(new Image(file2.toURI().toString()));
-        image_apriori.setImage(new Image(file2.toURI().toString()));
+        image_visits_all.setImage(new Image(file1.toURI().toString()));
+        image_apriori.setImage(new Image(file5.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
                 SceneManager.renderScene("specializationController");
                 event.consume();
             }
@@ -187,7 +184,6 @@ public class AllVisitsController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("med_ResController", "FXML/BorderPane3.fxml");
                 SceneManager.renderScene("med_ResController");
                 event.consume();
             }
@@ -197,7 +193,6 @@ public class AllVisitsController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("visitsController", "FXML/BorderPane2.fxml");
                 SceneManager.renderScene("visitsController");
                 event.consume();
             }
@@ -207,7 +202,6 @@ public class AllVisitsController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
                 SceneManager.renderScene("allVisitsController");
                 event.consume();
             }
@@ -217,7 +211,6 @@ public class AllVisitsController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("aprioriController", "FXML/Weka.fxml");
                 SceneManager.renderScene("aprioriController");
                 event.consume();
             }
@@ -238,16 +231,11 @@ public class AllVisitsController {
 
         int id_visit = tbl.getSelectionModel().getSelectedItem().getId_visit();
 
-        List<Vis_Med_Res> listka = visitsService.getDetailsInfo(id_visit);
+        List<Details> listka = visitsService.getDetailsInfo(id_visit);
 
-        for(Vis_Med_Res obj: listka
-             ) {
-            String imie = obj.getId_medicine().getName();
-            System.out.println(imie);
-        }
 
         Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setContentText("xd");
+        alert.setContentText(listka.toString());
         alert.setTitle("Szczegoly wizyty");
         alert.setHeaderText(null);
         ButtonType cancelButtonType = new ButtonType("Wyjdz", ButtonBar.ButtonData.CANCEL_CLOSE);

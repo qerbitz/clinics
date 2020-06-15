@@ -25,15 +25,10 @@
                               <ImageView fx:id="image_visits" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="image_specialization" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                               <ImageView fx:id="image_visits_all" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" fx:id="xdd4" />
+                              <ImageView fx:id="image_apriori" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
-                        <ComboBox fx:id="choice_voivodeship" layoutX="325.0" layoutY="15.0" onAction="#choice_voievodship_action" prefWidth="150.0" />
-                        <ComboBox fx:id="choice_place" layoutX="499.0" layoutY="15.0" onAction="#choice_place_action" prefWidth="150.0" />
-                        <DatePicker fx:id="date_to" layoutX="6.0" layoutY="511.0" />
-                        <DatePicker fx:id="date_from" layoutX="6.0" layoutY="463.0" />
-                        <Label layoutX="70.0" layoutY="432.0" text="Okres od" />
-                        <Button layoutX="62.0" layoutY="545.0" mnemonicParsing="false" onAction="#show_filtered" text="Wyswietl" />
+                        <ComboBox fx:id="choice_voivodeship" layoutX="409.0" layoutY="17.0" onAction="#choice_voievodship_action" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
             </content>

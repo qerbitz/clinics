@@ -72,20 +72,19 @@ public class SpecializationController {
         File file1 = new File("D:\\Pobrane - chrome\\unnamed.png");
         File file2 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
         File file3 = new File("D:\\Pobrane - chrome\\Badania_leki.png");
-        File file4 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
-        File file5 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
+        File file4 = new File("D:\\Pobrane - chrome\\liczba.png");
+        File file5 = new File("D:\\Pobrane - chrome\\apriori.png");
 
-        image_visits.setImage(new Image(file1.toURI().toString()));
+        image_visits.setImage(new Image(file4.toURI().toString()));
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
-        image_visits_all.setImage(new Image(file2.toURI().toString()));
-        image_apriori.setImage(new Image(file2.toURI().toString()));
+        image_visits_all.setImage(new Image(file1.toURI().toString()));
+        image_apriori.setImage(new Image(file5.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
                 SceneManager.renderScene("specializationController");
                 event.consume();
             }
@@ -95,7 +94,6 @@ public class SpecializationController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("med_ResController", "FXML/BorderPane3.fxml");
                 SceneManager.renderScene("med_ResController");
                 event.consume();
             }
@@ -105,7 +103,6 @@ public class SpecializationController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("visitsController", "FXML/BorderPane2.fxml");
                 SceneManager.renderScene("visitsController");
                 event.consume();
             }
@@ -115,7 +112,6 @@ public class SpecializationController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
                 SceneManager.renderScene("allVisitsController");
                 event.consume();
             }
@@ -125,7 +121,6 @@ public class SpecializationController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("aprioriController", "FXML/Weka.fxml");
                 SceneManager.renderScene("aprioriController");
                 event.consume();
             }

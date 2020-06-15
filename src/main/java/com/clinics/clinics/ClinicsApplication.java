@@ -32,9 +32,13 @@ public class ClinicsApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager.setStage(primaryStage);
-		SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
+		SceneManager.addScene("med_ResController", "FXML/BorderPane3.fxml");
 		SceneManager.addScene("visitsController", "FXML/BorderPane2.fxml");
-		SceneManager.renderScene("specializationController");
+		SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
+		SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
+		SceneManager.addScene("aprioriController", "FXML/Weka.fxml");
+		SceneManager.addScene("loginController", "FXML/LoginPane.fxml");
+		SceneManager.renderScene("loginController");
 	}
 
 	@Override

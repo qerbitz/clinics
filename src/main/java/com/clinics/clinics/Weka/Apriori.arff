@@ -1,12 +1,12 @@
-@relation Nazwa_leku
+@relation Apriori
 
-@attribute 'Teflexo' {t}
-@attribute 'Prevenar' {t}
-@attribute 'Qlaira' {t}
-@attribute 'Apap' {t}
+@attribute diagnoza {nadciśnienie_tętnicze, Ostra_choroba_reumatyczna, ospa}
+@attribute badanie {morfologia_krwi, taki, kontrola}
+@attribute lek {katelin, solgar, nom, pudroderm, spray}
 
 @data
-t,?,?,?
-?,t,?,?
-?,?,t,?
-?,?,?,t,
+nadciśnienie_tętnicze, morfologia_krwi, katelin
+nadciśnienie_tętnicze, morfologia_krwi, solgar
+Ostra_choroba_reumatyczna, taki, nom
+ospa, kontrola, pudroderm
+ospa, kontrola, spray

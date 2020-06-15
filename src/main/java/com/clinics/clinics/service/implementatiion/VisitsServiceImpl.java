@@ -1,6 +1,7 @@
 package com.clinics.clinics.service.implementatiion;
 
 import com.clinics.clinics.entity.*;
+import com.clinics.clinics.entity.helpclasses.Details;
 import com.clinics.clinics.entity.helpclasses.Med_Res_Count;
 import com.clinics.clinics.entity.helpclasses.VisitsCount;
 import com.clinics.clinics.repository.VisitsRepository;
@@ -62,6 +63,24 @@ public class VisitsServiceImpl implements VisitsService {
     }
 
     @Override
+    public List<VisitsCount> getVisitsCountByRegions(String voievodship) {
+        List<VisitsCount> visitsCount = new ArrayList<>();
+
+        for (Object[] obj : visitsRepository.getVisitsCountAllClinic(voievodship)){
+            String place1 = String.valueOf(obj[0]);
+            String street1 = String.valueOf(obj[1]);
+            String count1 = String.valueOf(obj[2]);
+            VisitsCount object = new VisitsCount();
+            object.setPlace(place1);
+            object.setStreet(street1);
+            object.setCount(count1);
+            visitsCount.add(object);
+        }
+
+        return visitsCount;
+    }
+
+    @Override
     public List<Med_Res_Count> getMed_Res_Count() {
         List<Med_Res_Count> med_res_count = new ArrayList<>();
 
@@ -105,6 +124,8 @@ public class VisitsServiceImpl implements VisitsService {
 
 
             Visits v = new Visits();
+            String ajdi = String.valueOf(obj[6]);
+            v.setId_visit(Integer.parseInt(ajdi));
             v.setId_patient(p);
             v.setId_doctor(doctor);
             v.setId_diagnosis(diagnose);
@@ -150,25 +171,16 @@ public class VisitsServiceImpl implements VisitsService {
     }
 
     @Override
-    public List<Vis_Med_Res> getDetailsInfo(int ajdi) {
-        List<Vis_Med_Res> list = new ArrayList<>();
+    public List<Details> getDetailsInfo(int ajdi) {
+        List<Details> list = new ArrayList<>();
 
         for (Object[] obj : visitsRepository.getDetailsInfo(ajdi)){
 
-            Diagnosis diagnose = new Diagnosis();
-            diagnose.setName(String.valueOf(obj[0]));
+            Details d = new Details();
+            d.setMedicine(String.valueOf(obj[0]));
+            d.setResearch(String.valueOf(obj[1]));
 
-            Medicines medicines = new Medicines();
-            medicines.setName(String.valueOf(1));
-
-            Research research = new Research();
-            research.setName(String.valueOf(2));
-
-            Vis_Med_Res vmr = new Vis_Med_Res();
-            vmr.setId_research(research);
-            vmr.setId_medicine(medicines);
-
-            list.add(vmr);
+            list.add(d);
         }
 
         return list;

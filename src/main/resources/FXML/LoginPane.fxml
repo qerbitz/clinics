@@ -12,7 +12,7 @@
                 <Font name="System Bold Italic" size="42.0" />
             </font>
         </Text>
-        <TextField fx:id="textfield_login_name" layoutX="371.0" layoutY="258.0" />
+        <TextField fx:id="textfield_login" layoutX="371.0" layoutY="258.0" />
         <Text fill="#009fff" layoutX="286.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login:">
             <font>
                 <Font name="System Bold Italic" size="22.0" />
@@ -23,8 +23,8 @@
                 <Font name="System Bold Italic" size="22.0" />
             </font>
         </Text>
-        <PasswordField fx:id="text_field_password" layoutX="371.0" layoutY="300.0" />
-        <Button fx:id="button_login" ellipsisString="" layoutX="371.0" layoutY="341.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-radius: 60; -fx-background-color: #009fff;" text="Zaloguj" textFill="WHITE">
+        <PasswordField fx:id="textfield_password" layoutX="371.0" layoutY="300.0" />
+        <Button ellipsisString="" layoutX="371.0" layoutY="341.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="25.0" prefWidth="149.0" style="-fx-background-radius: 60; -fx-background-color: #009fff;" text="Zaloguj" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="18.0" />
             </font>

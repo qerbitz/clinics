@@ -21,7 +21,9 @@
                               <ImageView fx:id="image_apriori" fitHeight="75.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
-                        <TextArea layoutX="184.0" layoutY="57.0" prefHeight="500.0" prefWidth="600.0" />
+                        <Button layoutX="450.0" layoutY="17.0" mnemonicParsing="false" onAction="#akcja" text="Button" />
+                        <TextField fx:id="text_field_diagnose" layoutX="213.0" layoutY="25.0" prefHeight="17.0" prefWidth="125.0" />
+                        <TextField fx:id="tekscior" layoutX="285.0" layoutY="159.0" prefHeight="372.0" prefWidth="448.0" />
                      </children>
                   </AnchorPane>
             </content>

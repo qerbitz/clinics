@@ -9,4 +9,5 @@ public interface AdressService {
     List<String> getAllVoievodship();
 
     List<Adress> getAllPlaces(String voievodship);
+
 }

@@ -2,19 +2,26 @@ package com.clinics.clinics.Controllers;
 
 import com.clinics.clinics.SceneManager;
 import com.clinics.clinics.Weka.BasicTools;
-import com.clinics.clinics.Weka.SQLDataImporter;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.springframework.stereotype.Controller;
 import weka.associations.Apriori;
+import weka.associations.AssociationRule;
+import weka.associations.AssociationRules;
+import weka.associations.Item;
 import weka.core.Instances;
 import weka.core.Utils;
 
-import java.awt.*;
 import java.io.File;
+import javafx.scene.control.TextField;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 public class AprioriController {
@@ -36,26 +43,30 @@ public class AprioriController {
     private ImageView image_apriori;
 
     @FXML
-    private TextArea associationData;
+    private TextField tekscior;
+
+    @FXML
+    private TextField text_field_diagnose;
+
+    StringBuilder recommendedMedicine = new StringBuilder();
 
     public void help(){
         File file1 = new File("D:\\Pobrane - chrome\\unnamed.png");
         File file2 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
         File file3 = new File("D:\\Pobrane - chrome\\Badania_leki.png");
-        File file4 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
-        File file5 = new File("D:\\Pobrane - chrome\\Specjalizacje.png");
+        File file4 = new File("D:\\Pobrane - chrome\\liczba.png");
+        File file5 = new File("D:\\Pobrane - chrome\\apriori.png");
 
-        image_visits.setImage(new Image(file1.toURI().toString()));
+        image_visits.setImage(new Image(file4.toURI().toString()));
         image_specialization.setImage(new Image(file2.toURI().toString()));
         image_med.setImage(new Image(file3.toURI().toString()));
-        image_visits_all.setImage(new Image(file2.toURI().toString()));
-        image_apriori.setImage(new Image(file2.toURI().toString()));
+        image_visits_all.setImage(new Image(file1.toURI().toString()));
+        image_apriori.setImage(new Image(file5.toURI().toString()));
 
         image_specialization.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("specializationController", "FXML/BorderPane.fxml");
                 SceneManager.renderScene("specializationController");
                 event.consume();
             }
@@ -65,7 +76,6 @@ public class AprioriController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("med_ResController", "FXML/BorderPane3.fxml");
                 SceneManager.renderScene("med_ResController");
                 event.consume();
             }
@@ -75,7 +85,6 @@ public class AprioriController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("visitsController", "FXML/BorderPane2.fxml");
                 SceneManager.renderScene("visitsController");
                 event.consume();
             }
@@ -85,7 +94,6 @@ public class AprioriController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("allVisitsController", "FXML/BorderPane4.fxml");
                 SceneManager.renderScene("allVisitsController");
                 event.consume();
             }
@@ -95,51 +103,104 @@ public class AprioriController {
 
             @Override
             public void handle(MouseEvent event) {
-                SceneManager.addScene("aprioriController", "FXML/Weka.fxml");
                 SceneManager.renderScene("aprioriController");
                 event.consume();
             }
         });
     }
 
-    @FXML
-    void initialize() {
-
-        try {
-            String username = "postgres";
-            String password = "zaq1@WSX";
-
-            String query =
-                    "SELECT STRING_AGG(UH.USLUG_NAZWA, ', ')\n" +
-                            "FROM USLUGI_HOTELOWE UH\n" +
-                            "JOIN UZYTE_USLUGI UU ON UH.USLUG_ID = UU.USLUG_ID\n" +
-                            "JOIN REZERWACJE R ON UU.REZ_ID = R.REZ_ID\n" +
-                            "JOIN GOSCIE G ON R.GOSC_ID = G.GOSC_ID\n" +
-                            "GROUP BY UU.REZ_ID\n" +
-                            "ORDER BY UU.REZ_ID";
-
-            String query1 = "SELECT l.nazwa_leku FROM leki l;";
-
-            Instances data = SQLDataImporter.getDataSetFromPostgreSQL(username, password, query1, 0);
-            String fileName = "F:\\Programowanie\\clinics\\src\\main\\java\\com\\clinics\\clinics\\Weka\\Apriori.arff"; //Lokalizacja pliku z danymi
-            BasicTools.saveData(data, fileName); //Zapis tablicy do pliku w fromacie ARFF
-            BasicTools.processToApriori(data);
-            data = BasicTools.loadData(fileName);
-            data.setClassIndex(data.numAttributes() - 1);
-
-            //String set = "-N " + minRules.getText() + " -C " + minMetric.getText() + " -M " + minSupp;
-            String[] options = Utils.splitOptions("-N 10 -C 0.2 -M 0.05");
-            Apriori apriori = new Apriori();
-            apriori.setOptions(options);
-            apriori.buildAssociations(data);
+    public void regulyAsocjacyjne(String diagnose) throws Exception {
 
 
-            associationData.setText(apriori.toString());
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
+        Instances data = BasicTools.loadData("F:\\Programowanie\\clinics\\src\\main\\java\\com\\clinics\\clinics\\Weka\\Apriori.arff");
+       // Instances data = BasicTools.loadData("./src/main/java/com/clinics/Weka/Apriori.arff");
+        data.setClassIndex(data.numAttributes() - 1);
+
+        //Opcje liczenia regul asocjacyjnych
+        //-N ->Liczba regul do policzenia (standardowo: 10)
+        //-C ->Minmalna ufnosc reguly (standardowo: 0.9).
+        String[] options = Utils.splitOptions("-N 20 -C 0.6");
+        Apriori apriori = new Apriori();
+        apriori.setOptions(options);
+        apriori.buildAssociations(data); //Generowanie regul asocjacyjnych
+
+        System.out.println("Liczba regul=" + apriori.getNumRules());
+
+        AssociationRules rules = apriori.getAssociationRules();
+        List<AssociationRule> ruleList  = rules.getRules();
+
+        for (int i=0; i<ruleList.size(); i++)
+        {
+            AssociationRule rule = ruleList.get(i); //Pobranie pojedynczej reguly
+
+            //Pobranie opisu poprzednika reguly
+            Collection<Item> poprzednik = rule.getPremise();
+            Iterator<Item> iteratorPoprzednik = poprzednik.iterator();
+            String poprzednikText = new String();
+            while (iteratorPoprzednik.hasNext())
+            {
+                poprzednikText = poprzednikText + "("+iteratorPoprzednik.next().toString()+")";
+                if (iteratorPoprzednik.hasNext()) poprzednikText = poprzednikText +"&";
+            }
+
+            //Pobranie opisu nastepnika reguly
+            Collection<Item> nastepnik = rule.getConsequence();
+            Iterator<Item> iteratorNastepnik = nastepnik.iterator();
+            String nastepnikText = new String();
+            while (iteratorNastepnik.hasNext())
+            {
+                nastepnikText = nastepnikText + "("+iteratorNastepnik.next().toString()+")";
+                if (iteratorNastepnik.hasNext()) nastepnikText = nastepnikText +"&";
+            }
+
+
+            //Pobranie wsparcie i obliczenia ufnosci
+            int wsparciePoprzednika = rule.getPremiseSupport();
+            int wsparcieCalosci = rule.getTotalSupport();
+            double ufnosc = (double)wsparcieCalosci/wsparciePoprzednika;
+
+            /*
+
+            System.out.print(poprzednikText+"=>"+nastepnikText+", ");
+            System.out.print("Wsparcie:"+wsparcieCalosci+", ");
+            System.out.println("Ufnosc:"+ufnosc);*/
+
+            String xd2 = rule.getConsequence().toString();
+            if(xd2.equals("[diagnoza="+ diagnose +"]")){
+                recommendedMedicine.append(poprzednikText);
+                recommendedMedicine.append("=>");
+                recommendedMedicine.append(nastepnikText);
+                recommendedMedicine.append(", ");
+                recommendedMedicine.append("Wsparcie:");
+                recommendedMedicine.append(wsparcieCalosci);
+                recommendedMedicine.append(", ");
+                recommendedMedicine.append("Ufnosc:");
+                recommendedMedicine.append(ufnosc);
+                recommendedMedicine.append("\n");
+             }
+
+
+
+
         }
+        tekscior.setText(recommendedMedicine.toString());
+
+    }
+
+    @FXML
+    void akcja(ActionEvent event) throws Exception {
+
+        tekscior.clear();
+        regulyAsocjacyjne(text_field_diagnose.getText());
+        text_field_diagnose.clear();
+    }
+
+    @FXML
+    void initialize() throws Exception {
 
         help();
+
+
     }
 }
 
